@@ -7,6 +7,7 @@ export default function QRScanner() {
   const [scanned, setScanned] = useState(false);
 
   const handleBarCodeScanned = ({ type, data }) => {
+    console.log(type, data)
     setScanned(true);
     alert(`Scanned QR code: ${data}`);
   };
@@ -24,21 +25,18 @@ export default function QRScanner() {
   if (hasPermission === false) {
     return <Text>No access to camera.</Text>;
   }
-  console.log(hasPermission, scanned)
+
   return (
     <View style={styles.container}>
-      <Text>Hello</Text>
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
       />
-      <Text>Hello</Text>
       {scanned && (
         <View style={styles.scanOverlay}>
           <Text style={styles.scanOverlayText}>QR code scanned!</Text>
         </View>
       )}
-      <Text>Hello</Text>
     </View>
   );
 }

@@ -22,7 +22,7 @@ export default function Login({setUser, setCompanyUser}){
           username,
           password,
         };
-        fetch("http://127.0.0.1:3000/api/login", {
+        fetch("http://track-my-sand.herokuapp.com/api/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

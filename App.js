@@ -34,7 +34,7 @@ export default function App() {
   },[setCompanyUser])
 
   function handleLogout() {
-    fetch("http://127.0.0.1:3000/api/logout", { method: "DELETE" }).then((r) => {
+    fetch("http://track-my-sand.herokuapp.com/api/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
         setUser(null);
         setCompanyUser(null)
