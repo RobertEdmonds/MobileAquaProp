@@ -9,7 +9,7 @@ export default function QRScanner() {
   const handleBarCodeScanned = ({ type, data }) => {
     console.log(type, data)
     setScanned(true);
-    alert(`Scanned QR code: ${data}`);
+    alert(`Scanned QR code: ${data.org.iso.QRCode}`);
   };
 
   useEffect(() => {
