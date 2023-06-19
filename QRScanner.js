@@ -2,7 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
-export default function QRScanner() {
+export default function QRScanner({
+    setTruck,
+    setMine,
+    setTare,
+    setGross,
+    setTicket,
+    setPo
+}) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 

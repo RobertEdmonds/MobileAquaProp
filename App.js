@@ -7,12 +7,19 @@ import Authenticate from './Authenticate';
 import Login from './Login';
 import QRScanner from './QRScanner';
 import CompanyView from './CompanyView';
+import TruckForm from './TruckForm';
 
 const Stack = createNativeStackNavigator()
 
 export default function App() {
   const [ user, setUser ] = useState(null)
   const [ companyUser, setCompanyUser ] = useState(null)
+  const [ truck, setTruck ] = useState('')
+  const [ mine, setMine ] = useState('')
+  const [ tare, setTare ] = useState('')
+  const [ gross, setGross ] = useState('')
+  const [ ticket, setTicket ] = useState('')
+  const [ po, setPo ] = useState('')
 
   useEffect(() => {
     fetch("http://127.0.0.1:3000/api/me").then((resp) => {
@@ -54,7 +61,27 @@ export default function App() {
         <Stack.Screen name="Home" style={styles.view}>
           {(props) => <Authenticate {...props} handleLogout={handleLogout}/>}
         </Stack.Screen>
+        <Stack.Screen name="QR Scanner" style={styles.view}>
+          {(props) => <QRScanner {...props} 
+            setTruck={setTruck}
+            setMine={setMine}
+            setTare={setTare}
+            setGross={setGross}
+            setTicket={setTicket}
+            setPo={setPo}
+            />}
+        </Stack.Screen>
         <Stack.Screen name="QR Scanner" component={QRScanner}/>
+        <Stack.Screen name="Truck Form" style={styles.view}>
+          {(props) => <TruckForm {...props}
+            setTruck={setTruck}
+            setMine={setMine}
+            setTare={setTare}
+            setGross={setGross}
+            setTicket={setTicket}
+            setPo={setPo} 
+          />}
+        </Stack.Screen>
       </Stack.Navigator>
     )}
     {companyUser &&  (
