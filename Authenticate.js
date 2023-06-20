@@ -16,7 +16,7 @@ export default function Authenticate({handleLogout, navigation}){
     const [ completed, setCompleted ] = useState(false)
 
     useEffect(() => {
-        fetch('http://127.0.0.1:3000/api/mobile_sites')
+        fetch('http://track-my-sand.herokuapp.com/api/mobile_sites')
         .then(resp => resp.json().then(site => {
             setAllSites(site)
             setSites(site)
