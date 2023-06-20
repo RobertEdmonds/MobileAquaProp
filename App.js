@@ -20,9 +20,10 @@ export default function App() {
   const [ gross, setGross ] = useState('')
   const [ ticket, setTicket ] = useState('')
   const [ po, setPo ] = useState('')
+  const [location, setLocation] = useState('')
 
   useEffect(() => {
-    fetch("http://127.0.0.1:3000/api/me").then((resp) => {
+    fetch("http://track-my-sand.herokuapp.com/api/me").then((resp) => {
       if (resp.ok) {
         resp.json().then((user) => {
           setUser(user)
@@ -32,7 +33,7 @@ export default function App() {
   }, [setUser]);
 
   useEffect(() => {
-      fetch('http://127.0.0.1:3000/api/company_personnel')
+      fetch('http://track-my-sand.herokuapp.com/api/company_personnel')
       .then(resp => {
         if(resp.ok) {
           resp.json().then(user => setCompanyUser(user))
@@ -49,6 +50,7 @@ export default function App() {
     });
   } 
   // Alert.alert('Simple Button pressed')
+  console.log(truck, mine, tare, gross, ticket, po, location)
   return (
     <>
     <StatusBar
@@ -69,9 +71,9 @@ export default function App() {
             setGross={setGross}
             setTicket={setTicket}
             setPo={setPo}
+            setLocation={setLocation}
             />}
         </Stack.Screen>
-        <Stack.Screen name="QR Scanner" component={QRScanner}/>
         <Stack.Screen name="Truck Form" style={styles.view}>
           {(props) => <TruckForm {...props}
             setTruck={setTruck}
@@ -80,6 +82,14 @@ export default function App() {
             setGross={setGross}
             setTicket={setTicket}
             setPo={setPo} 
+            setLocation={setLocation}
+            truck={truck}
+            mine={mine}
+            tare={tare}
+            gross={gross}
+            ticket={ticket}
+            po={po}
+            location={location}
           />}
         </Stack.Screen>
       </Stack.Navigator>

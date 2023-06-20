@@ -8,15 +8,30 @@ export default function QRScanner({
     setTare,
     setGross,
     setTicket,
-    setPo
+    setPo,
+    setLocation, 
+    navigation
 }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
   const handleBarCodeScanned = ({ type, data }) => {
-    console.log(type, data)
+    const truckObj = JSON.parse(data)
+    setTruck(truckObj.talipay_raw.truck)
+    setMine(truckObj.talipay_raw.mine)
+    setPo(truckObj.talipay_raw.po)
+    setTicket(truckObj.ticket.number)
+    setLocation(truckObj.talipay_raw.well)
+    if(parseInt(truckObj.talipay_raw.tare_weight) < 100){
+        setTare(parseInt(truckObj.talipay_raw.tare_weight) * 2000)
+        setGross(parseInt(truckObj.talipay_raw.gross_weight) * 2000)
+    }else{
+        setTare(parseInt(truckObj.talipay_raw.tare_weight))
+        setGross(parseInt(truckObj.talipay_raw.gross_weight))
+    }
+    console.log(JSON.parse(data).talipay_raw.truck)
     setScanned(true);
-    alert(`Scanned QR code: ${data.org.iso.QRCode}`);
+    navigation.navigate('Truck Form')
   };
 
   useEffect(() => {
