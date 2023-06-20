@@ -23,8 +23,8 @@ export default function QRScanner({
     setTicket(truckObj.ticket.number)
     setLocation(truckObj.talipay_raw.well)
     if(parseInt(truckObj.talipay_raw.tare_weight) < 100){
-        setTare(parseInt(truckObj.talipay_raw.tare_weight) * 2000)
-        setGross(parseInt(truckObj.talipay_raw.gross_weight) * 2000)
+        setTare(parseFloat(truckObj.talipay_raw.tare_weight) * 2000)
+        setGross(parseFloat(truckObj.talipay_raw.gross_weight) * 2000)
     }else{
         setTare(parseInt(truckObj.talipay_raw.tare_weight))
         setGross(parseInt(truckObj.talipay_raw.gross_weight))

@@ -14,6 +14,7 @@ const Stack = createNativeStackNavigator()
 export default function App() {
   const [ user, setUser ] = useState(null)
   const [ companyUser, setCompanyUser ] = useState(null)
+  const [ sites, setSites ] = useState([])
   const [ truck, setTruck ] = useState('')
   const [ mine, setMine ] = useState('')
   const [ tare, setTare ] = useState('')
@@ -49,8 +50,17 @@ export default function App() {
       }
     });
   } 
-  // Alert.alert('Simple Button pressed')
-  console.log(truck, mine, tare, gross, ticket, po, location)
+
+  const handleAddSand = (load) => {
+    const updatedSite = sites.filter(site => {
+      if(site.id === load.site_id){
+
+      }else{
+        return site
+      }
+    })
+  }
+
   return (
     <>
     <StatusBar
@@ -61,7 +71,7 @@ export default function App() {
     {user && (
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" style={styles.view}>
-          {(props) => <Authenticate {...props} handleLogout={handleLogout}/>}
+          {(props) => <Authenticate {...props} handleLogout={handleLogout} sites={sites} setSites={setSites}/>}
         </Stack.Screen>
         <Stack.Screen name="QR Scanner" style={styles.view}>
           {(props) => <QRScanner {...props} 
@@ -90,6 +100,8 @@ export default function App() {
             ticket={ticket}
             po={po}
             location={location}
+            sites={sites}
+            handleAddSand={handleAddSand}
           />}
         </Stack.Screen>
       </Stack.Navigator>

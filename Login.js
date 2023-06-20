@@ -42,7 +42,6 @@ export default function Login({setUser, setCompanyUser}){
           } else {
             r.json().then((err) => {
                 Alert.alert(`${err.errors.map(error => `${error}`)}`)
-                console.log(err.errors)
             });
           }
         });

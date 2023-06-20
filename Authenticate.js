@@ -10,8 +10,7 @@ import { Button,
     } from 'react-native'
 import { Header } from 'react-native-elements';
 
-export default function Authenticate({handleLogout, navigation}){
-    const [ sites, setSites ] = useState([])
+export default function Authenticate({handleLogout, navigation, sites, setSites}){
     const [ allSites, setAllSites] = useState([])
     const [ completed, setCompleted ] = useState(false)
 
