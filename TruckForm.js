@@ -27,46 +27,56 @@ export default function TruckForm({
     location,
     sites,
     navigation,
-    handleAddSand
+    handleAddSand,
+    setScanned
 }){
 
     const handleTruckLoad = () => {
-        const formData = {
-            truck, 
-            mine,
-            ticket_number: ticket,  
-            tare_weight: parseInt(tare), 
-            gross_weight: parseInt(gross), 
-            ship_to: location, 
-            po: po, 
-            site_id: sites.find(site => site.location.toUpperCase() === location.toUpperCase()).id
-        }
-        fetch(`http://track-my-sand.herokuapp.com/api/trucks`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-          }).then(resp => {
-            if(resp.ok){
-                resp.json().then(truck => {
-                    handleAddSand(truck)
-                    navigation.navigate('Home')
-                })
-                setTruck('')
-                setMine('')
-                setTare("")
-                setGross("")
-                setTicket('')
-                setLocation('')
-                setPo('')
-            }else{
-                resp.json().then(err => {
-                    Alert.alert(`${err.errors.map(error => `${error}`)}`)
-                })
+        if(!sites.find(site => site.location.toUpperCase() === location.toUpperCase())){
+            setScanned(false)
+            Alert.alert('Site has not been created yet')
+        }else{
+            const formData = {
+                truck, 
+                mine,
+                ticket_number: ticket,  
+                tare_weight: parseInt(tare), 
+                gross_weight: parseInt(gross), 
+                ship_to: location, 
+                po: po, 
+                site_id: sites.find(site => site.location.toUpperCase() === location.toUpperCase()).id
             }
-        })
+            fetch(`http://track-my-sand.herokuapp.com/api/trucks`, {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            }).then(resp => {
+                if(resp.ok){
+                    resp.json().then(truck => {
+                        handleAddSand(truck)
+                        // setScanned(false)
+                        navigation.navigate('QR Scanner')
+                    })
+                    setTruck('')
+                    setMine('')
+                    setTare("")
+                    setGross("")
+                    setTicket('')
+                    setLocation('')
+                    setPo('')
+                }else{
+                    resp.json().then(err => {
+                        // setScanned(false)
+                        Alert.alert(`${err.errors.map(error => `${error}`)}`)
+                    })
+                }
+                setScanned(false)
+            })
+        }
     }
+
 
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

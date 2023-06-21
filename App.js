@@ -22,6 +22,7 @@ export default function App() {
   const [ ticket, setTicket ] = useState('')
   const [ po, setPo ] = useState('')
   const [location, setLocation] = useState('')
+  const [scanned, setScanned] = useState(false);
 
   useEffect(() => {
     fetch("http://track-my-sand.herokuapp.com/api/me").then((resp) => {
@@ -54,11 +55,14 @@ export default function App() {
   const handleAddSand = (load) => {
     const updatedSite = sites.filter(site => {
       if(site.id === load.site_id){
-
+        site.total_on_site += load.total
+        site.total_delivered += load.total
+        return site
       }else{
         return site
       }
     })
+    setSites(updatedSite)
   }
 
   return (
@@ -82,6 +86,8 @@ export default function App() {
             setTicket={setTicket}
             setPo={setPo}
             setLocation={setLocation}
+            setScanned={setScanned}
+            scanned={scanned}
             />}
         </Stack.Screen>
         <Stack.Screen name="Truck Form" style={styles.view}>
@@ -102,6 +108,7 @@ export default function App() {
             location={location}
             sites={sites}
             handleAddSand={handleAddSand}
+            setScanned={setScanned}
           />}
         </Stack.Screen>
       </Stack.Navigator>

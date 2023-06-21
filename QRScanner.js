@@ -10,10 +10,11 @@ export default function QRScanner({
     setTicket,
     setPo,
     setLocation, 
-    navigation
+    navigation,
+    setScanned,
+    scanned
 }) {
   const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(false);
 
   const handleBarCodeScanned = ({ type, data }) => {
     const truckObj = JSON.parse(data)
@@ -29,7 +30,6 @@ export default function QRScanner({
         setTare(parseInt(truckObj.talipay_raw.tare_weight))
         setGross(parseInt(truckObj.talipay_raw.gross_weight))
     }
-    console.log(JSON.parse(data).talipay_raw.truck)
     setScanned(true);
     navigation.navigate('Truck Form')
   };
