@@ -56,7 +56,6 @@ export default function TruckForm({
                 if(resp.ok){
                     resp.json().then(truck => {
                         handleAddSand(truck)
-                        // setScanned(false)
                         navigation.navigate('QR Scanner')
                     })
                     setTruck('')
@@ -68,7 +67,6 @@ export default function TruckForm({
                     setPo('')
                 }else{
                     resp.json().then(err => {
-                        // setScanned(false)
                         Alert.alert(`${err.errors.map(error => `${error}`)}`)
                     })
                 }
