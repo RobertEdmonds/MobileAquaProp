@@ -4,10 +4,10 @@
     "slug": "MobileAquaProp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/AquaPropEm.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/AquaPropEm.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
