@@ -11,6 +11,7 @@ import {
   Button,
   Keyboard,
   Alert,
+  SafeAreaView
 } from 'react-native';
 
 export default function Login({setUser, setCompanyUser}){
@@ -48,6 +49,7 @@ export default function Login({setUser, setCompanyUser}){
       }
 
   return (
+    <SafeAreaView>
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
@@ -69,6 +71,7 @@ export default function Login({setUser, setCompanyUser}){
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 

@@ -1,6 +1,6 @@
 // import { StatusBar } from 'expo-status-bar';
-import { useState, useEffect } from 'react';
-import { StyleSheet, Button, Alert, View, StatusBar } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, View, StatusBar, SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Authenticate from './Authenticate';
@@ -22,26 +22,7 @@ export default function App() {
   const [ ticket, setTicket ] = useState('')
   const [ po, setPo ] = useState('')
   const [location, setLocation] = useState('')
-  const [scanned, setScanned] = useState(false);
-
-  useEffect(() => {
-    fetch("http://track-my-sand.herokuapp.com/api/me").then((resp) => {
-      if (resp.ok) {
-        resp.json().then((user) => {
-          setUser(user)
-        });
-      }
-    });
-  }, [setUser]);
-
-  useEffect(() => {
-      fetch('http://track-my-sand.herokuapp.com/api/company_personnel')
-      .then(resp => {
-        if(resp.ok) {
-          resp.json().then(user => setCompanyUser(user))
-        }
-      })
-  },[setCompanyUser])
+  const [scanned, setScanned] = useState(false)
 
   function handleLogout() {
     fetch("http://track-my-sand.herokuapp.com/api/logout", { method: "DELETE" }).then((r) => {
@@ -66,7 +47,7 @@ export default function App() {
   }
 
   return (
-    <>
+    <SafeAreaView style={styles.safe}>
     <StatusBar
         backgroundColor="rgb(45, 45, 45)" 
         barStyle="default"
@@ -121,16 +102,20 @@ export default function App() {
       </Stack.Navigator>
     )}
     {user === null && companyUser === null && (
-      <View style={styles.container}>
-        <Login setUser={setUser} setCompanyUser={setCompanyUser}/>
-      </View>
+        <View style={styles.container}>
+          <Login setUser={setUser} setCompanyUser={setCompanyUser}/>
+        </View>
     )}
     </NavigationContainer>
-    </>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safe:{
+    flex: 1,
+    backgroundColor: "rgb(45, 45, 45)"
+  },
   container: {
     flex: 1,
     backgroundColor: 'rgb(45, 45, 45)',

@@ -30,7 +30,7 @@ export default function Authenticate({handleLogout, navigation, sites, setSites}
     }
 
     return(
-        <>
+        <SafeAreaView>
         <Header style={styles.container}>
             <View style={styles.header_button}>
             <Button
@@ -135,7 +135,7 @@ export default function Authenticate({handleLogout, navigation, sites, setSites}
             </ScrollView>
         </SafeAreaView>
         
-        </>
+        </SafeAreaView>
     )
 }
 

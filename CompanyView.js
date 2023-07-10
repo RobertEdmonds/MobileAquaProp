@@ -27,7 +27,7 @@ export default function CompanyView({companyUser, handleLogout}){
     console.log(companySites)
 
     return(
-        <>
+        <SafeAreaView>
         <Header style={styles.container}>
             <View style={styles.header_button}>
             <Button
@@ -127,7 +127,7 @@ export default function CompanyView({companyUser, handleLogout}){
         </ScrollView>
     </SafeAreaView>
     
-    </>
+    </SafeAreaView>
     )
 }
 
