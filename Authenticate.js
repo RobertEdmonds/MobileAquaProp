@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from 'react'
+import {useState, useEffect} from 'react'
 import { Button, 
     SafeAreaView, 
     ScrollView, 
@@ -8,7 +8,7 @@ import { Button,
     Text,
     TextInput, 
     } from 'react-native'
-import { Header } from 'react-native-elements';
+
 
 export default function Authenticate({handleLogout, navigation, sites, setSites}){
     const [ allSites, setAllSites] = useState([])
@@ -31,8 +31,9 @@ export default function Authenticate({handleLogout, navigation, sites, setSites}
 
     return(
         <SafeAreaView>
-        <Header style={styles.container}>
-            <View style={styles.header_button}>
+        {/* <Header style={styles.container}> */}
+        <View style={styles.header}>
+            <View style={styles.header_button_left}>
             <Button
             onPress={() => setCompleted(!completed)}
             title={completed ? "Completed" : "Active"}
@@ -45,7 +46,7 @@ export default function Authenticate({handleLogout, navigation, sites, setSites}
             style={styles.text_input} 
             editable={true} 
             onChangeText={text => handleSearch(text)}/>
-            <View style={styles.header_button}>
+            <View style={styles.header_button_right}>
           <Button
             title="Logout"
             color="white"
@@ -53,7 +54,8 @@ export default function Authenticate({handleLogout, navigation, sites, setSites}
             onPress={() => handleLogout()}
           />
           </View>
-        </Header> 
+        </View>
+        {/* </Header>  */}
         <SafeAreaView style={styles.safe_view}>
             {completed ? (<></>): (
             <View style={styles.qr_button}>
@@ -172,12 +174,32 @@ const styles = StyleSheet.create({
       },
     text_input:{
         // marginTop: 0,
-        width: 100,
-        height: 35,
+        width: 120,
+        height: 45,
         padding: 5,
         backgroundColor: "white",
+        
     }, 
-    header_button:{
+    header:{
+        height: 45,
+        backgroundColor: 'rgb(21, 75, 126)',
+        flexDirection: 'row',
+      justifyContent: 'center',
+    flexWrap: 'wrap',
+    },
+    header_button_left:{
+        // marginTop: 0,
+        // position: "absolute",
+        marginRight: 20,
+        width: 110,
+        backgroundColor: "rgb(21, 75, 126)",
+    },
+    header_button_right:{
+        marginLeft: 20,
+        width: 110,
+        backgroundColor: "rgb(21, 75, 126)",
+    },
+    header_button_center:{
         // marginTop: 0,
         width: 110,
         backgroundColor: "rgb(21, 75, 126)",

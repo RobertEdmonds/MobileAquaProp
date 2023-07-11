@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef, useContext} from 'react'
+import {useState, useEffect} from 'react'
 import { Button, 
     SafeAreaView, 
     ScrollView, 
@@ -8,7 +8,7 @@ import { Button,
     Text,
     TextInput, 
     } from 'react-native'
-import { Header } from 'react-native-elements';
+
 
 export default function CompanyView({companyUser, handleLogout}){
     const [ completed, setCompleted ] = useState(false)
@@ -28,8 +28,8 @@ export default function CompanyView({companyUser, handleLogout}){
 
     return(
         <SafeAreaView>
-        <Header style={styles.container}>
-            <View style={styles.header_button}>
+        <View style={styles.header}>
+            <View style={styles.header_button_left}>
             <Button
             onPress={() => setCompleted(!completed)}
             title={completed ? "Completed" : "Active"}
@@ -42,7 +42,7 @@ export default function CompanyView({companyUser, handleLogout}){
             style={styles.text_input} 
             editable={true} 
             onChangeText={text => handleSearch(text)}/>
-            <View style={styles.header_button}>
+            <View style={styles.header_button_right}>
           <Button
             title="Logout"
             color="white"
@@ -50,7 +50,7 @@ export default function CompanyView({companyUser, handleLogout}){
             onPress={() => handleLogout()}
           />
           </View>
-        </Header>
+        </View>
         <SafeAreaView style={styles.safe_view}>
         <ScrollView contentContainerStyle={styles.scroll_view}>
         {completed ? (
@@ -149,6 +149,13 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       marginTop: 0,
     },
+    header:{
+        height: 45,
+        backgroundColor: 'rgb(21, 75, 126)',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+    },
     info_container: {
         flex: 1,
         backgroundColor: 'rgb(21, 75, 126)',
@@ -162,15 +169,23 @@ const styles = StyleSheet.create({
         borderBottomColor: "white",
         // marginTop: StatusBar.currentHeight || 0,
       },
-    text_input:{
+      text_input:{
         // marginTop: 0,
-        width: 100,
-        height: 35,
+        width: 120,
+        height: 45,
         padding: 5,
         backgroundColor: "white",
-    }, 
-    header_button:{
+        
+    },  
+    header_button_left:{
         // marginTop: 0,
+        // position: "absolute",
+        marginRight: 20,
+        width: 110,
+        backgroundColor: "rgb(21, 75, 126)",
+    },
+    header_button_right:{
+        marginLeft: 20,
         width: 110,
         backgroundColor: "rgb(21, 75, 126)",
     },

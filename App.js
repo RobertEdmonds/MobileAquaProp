@@ -134,5 +134,6 @@ const styles = StyleSheet.create({
   },
   view: {
     backgroundColor: 'rgb(45, 45, 45)',
+    marginBottom: 16
   },
 });
