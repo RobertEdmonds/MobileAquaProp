@@ -2,7 +2,7 @@
   "expo": {
     "name": "Aqua Prop Sand",
     "slug": "aquapropsand",
-    "version": "1.0.6",
+    "version": "1.0.8",
     "orientation": "portrait",
     "icon": "./assets/AquaPropEm.png",
     "userInterfaceStyle": "light",
@@ -32,6 +32,12 @@
         "projectId": "44ed0106-8d4e-4ee1-b523-b8f6dfba47bc"
       }
     },
-    "owner": "robertedmonds"
+    "owner": "robertedmonds",
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/44ed0106-8d4e-4ee1-b523-b8f6dfba47bc"
+    }
   }
 }

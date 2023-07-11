@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   KeyboardAvoidingView,
@@ -14,15 +14,18 @@ import {
   SafeAreaView
 } from 'react-native';
 
-export default function Login({setUser, setCompanyUser}){
+export default function Login({setUser, setCompanyUser, navigation}){
     const [ username, setUsername ] = useState('')
     const [ password, setPassword ] = useState('')
+    const [ nav, setNav ] = useState(false)
+    const [ companyNav, setCompanyNav ] = useState(false)
     
     function handleSubmit() {
         const dataForm = {
           username,
           password,
         };
+        setNav(false)
         fetch("http://track-my-sand.herokuapp.com/api/login", {
           method: "POST",
           headers: {
@@ -34,8 +37,10 @@ export default function Login({setUser, setCompanyUser}){
             r.json().then((user) => {
               if(user.hasOwnProperty('email')){
                 setCompanyUser(user)
+                setCompanyNav(true)
               }else{
                     setUser(user);
+                    setNav(true)
                 }
               })
             setUsername("");
@@ -48,8 +53,18 @@ export default function Login({setUser, setCompanyUser}){
         });
       }
 
+      useEffect(() => {
+        if(nav){
+          navigation.navigate('Home')
+          setNav(false)
+        }else if(companyNav){
+          navigation.navigate("Company Home")
+          setCompanyNav(false)
+        }
+      },[nav, companyNav])
+
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.safe_container}>
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
@@ -78,6 +93,12 @@ export default function Login({setUser, setCompanyUser}){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  safe_container: {
+    flex: 1,
+    backgroundColor: 'rgb(45, 45, 45)',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   login_image:{
     width: '100%',
