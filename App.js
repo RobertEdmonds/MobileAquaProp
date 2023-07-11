@@ -46,70 +46,80 @@ export default function App() {
     setSites(updatedSite)
   }
 
-  return (
-    <SafeAreaView style={styles.safe}>
-    <StatusBar
-        backgroundColor="rgb(45, 45, 45)" 
-        barStyle="default"
-      />
-    <NavigationContainer>
-    {user && (
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" style={styles.view}>
-          {(props) => <Authenticate {...props} handleLogout={handleLogout} sites={sites} setSites={setSites}/>}
-        </Stack.Screen>
-        <Stack.Screen name="QR Scanner" style={styles.view}>
-          {(props) => <QRScanner {...props} 
-            setTruck={setTruck}
-            setMine={setMine}
-            setTare={setTare}
-            setGross={setGross}
-            setTicket={setTicket}
-            setPo={setPo}
-            setLocation={setLocation}
-            setScanned={setScanned}
-            scanned={scanned}
-            />}
-        </Stack.Screen>
-        <Stack.Screen name="Truck Form" style={styles.view}>
-          {(props) => <TruckForm {...props}
-            setTruck={setTruck}
-            setMine={setMine}
-            setTare={setTare}
-            setGross={setGross}
-            setTicket={setTicket}
-            setPo={setPo} 
-            setLocation={setLocation}
-            truck={truck}
-            mine={mine}
-            tare={tare}
-            gross={gross}
-            ticket={ticket}
-            po={po}
-            location={location}
-            sites={sites}
-            handleAddSand={handleAddSand}
-            setScanned={setScanned}
-          />}
-        </Stack.Screen>
-      </Stack.Navigator>
-    )}
-    {companyUser &&  (
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" style={styles.view}>
-          {(props) => <CompanyView {...props} handleLogout={handleLogout} companyUser={companyUser}/>}
-        </Stack.Screen>
-      </Stack.Navigator>
-    )}
-    {user === null && companyUser === null && (
+  if(user){
+    return(
+      <SafeAreaView style={styles.safe}>
+        <NavigationContainer>
+            <StatusBar
+            backgroundColor="rgb(45, 45, 45)" 
+            barStyle="default"
+            />
+            <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen name="Home" style={styles.view}>
+              {(props) => <Authenticate {...props} handleLogout={handleLogout} sites={sites} setSites={setSites}/>}
+            </Stack.Screen>
+            <Stack.Screen name="QR Scanner" style={styles.view}>
+              {(props) => <QRScanner {...props} 
+                setTruck={setTruck}
+                setMine={setMine}
+                setTare={setTare}
+                setGross={setGross}
+                setTicket={setTicket}
+                setPo={setPo}
+                setLocation={setLocation}
+                setScanned={setScanned}
+                scanned={scanned}
+                />}
+            </Stack.Screen>
+            <Stack.Screen name="Truck Form" style={styles.view}>
+              {(props) => <TruckForm {...props}
+                setTruck={setTruck}
+                setMine={setMine}
+                setTare={setTare}
+                setGross={setGross}
+                setTicket={setTicket}
+                setPo={setPo} 
+                setLocation={setLocation}
+                truck={truck}
+                mine={mine}
+                tare={tare}
+                gross={gross}
+                ticket={ticket}
+                po={po}
+                location={location}
+                sites={sites}
+                handleAddSand={handleAddSand}
+                setScanned={setScanned}
+              />}
+            </Stack.Screen>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
+    )
+  }else if(companyUser){
+    return(
+      <SafeAreaView style={styles.safe}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen name="Home" style={styles.view}>
+              {(props) => <CompanyView {...props} handleLogout={handleLogout} companyUser={companyUser}/>}
+            </Stack.Screen>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
+    )
+  }else if(user === null && companyUser === null){
+    return(
+      <SafeAreaView style={styles.safe}>
         <View style={styles.container}>
           <Login setUser={setUser} setCompanyUser={setCompanyUser}/>
         </View>
-    )}
-    </NavigationContainer>
-    </SafeAreaView>
-  );
+      </SafeAreaView>
+    )
+  }
 }
+
+
 
 const styles = StyleSheet.create({
   safe:{
@@ -124,5 +134,5 @@ const styles = StyleSheet.create({
   },
   view: {
     backgroundColor: 'rgb(45, 45, 45)',
-  }
+  },
 });
