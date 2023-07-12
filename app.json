@@ -2,7 +2,7 @@
   "expo": {
     "name": "Aqua Prop Sand",
     "slug": "aquapropsand",
-    "version": "1.0.8",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/AquaPropEm.png",
     "userInterfaceStyle": "light",
