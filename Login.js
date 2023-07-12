@@ -18,8 +18,7 @@ import { useNavigation } from '@react-navigation/native';
 export default function Login({setUser, setCompanyUser}){
     const [ username, setUsername ] = useState('')
     const [ password, setPassword ] = useState('')
-    // const [ nav, setNav ] = useState(false)
-    // const [ companyNav, setCompanyNav ] = useState(false)
+
     const navigation = useNavigation()
     useLayoutEffect(() => {
       navigation.setOptions({headerShown: false});
@@ -30,7 +29,6 @@ export default function Login({setUser, setCompanyUser}){
           username,
           password,
         };
-        // setNav(false)
         fetch("http://track-my-sand.herokuapp.com/api/login", {
           method: "POST",
           headers: {
@@ -42,18 +40,18 @@ export default function Login({setUser, setCompanyUser}){
             r.json().then((user) => {
               if(user.hasOwnProperty('email')){
                 setCompanyUser(user)
-                navigation.reset({
-                  index: 0,
-                  routes: [{ name: 'Company Home' }],
-                })
-                navigation.navigate("Company Home")
+                // navigation.reset({
+                //   index: 0,
+                //   routes: [{ name: 'Company Home' }],
+                // })
+                // navigation.navigate("Company Home")
               }else{
                 setUser(user);
-                navigation.reset({
-                  index: 0,
-                  routes: [{ name: 'Home' }],
-                })
-                navigation.navigate('Home')
+                // navigation.reset({
+                //   index: 0,
+                //   routes: [{ name: 'Home' }],
+                // })
+                // navigation.navigate('Home')
                 }
             })
             setUsername("");
@@ -65,16 +63,6 @@ export default function Login({setUser, setCompanyUser}){
           }
         });
       }
-
-      // useEffect(() => {
-      //   if(nav){
-      //     navigation.navigate('Home')
-      //     // setNav(false)
-      //   }else if(companyNav){
-      //     navigation.navigate("Company Home")
-      //     // setCompanyNav(false)
-      //   }
-      // },[nav, companyNav])
 
   return (
     <SafeAreaView style={styles.safe_container}>

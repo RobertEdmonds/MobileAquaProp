@@ -10,7 +10,7 @@ import { Button,
     } from 'react-native'
 
 
-export default function Authenticate({ navigation, sites, setSites, setUser, setCompanyUser}){
+export default function Authenticate({ navigation, sites, handleLogout, setSites, setUser, setCompanyUser}){
     const [ allSites, setAllSites] = useState([])
     const [ completed, setCompleted ] = useState(false)
 
@@ -20,17 +20,7 @@ export default function Authenticate({ navigation, sites, setSites, setUser, set
             setAllSites(site)
             setSites(site)
         }))
-    },[setSites])
-
-    function handleLogout() {
-        fetch("http://track-my-sand.herokuapp.com/api/logout", { method: "DELETE" }).then((r) => {
-          if (r.ok) {
-            setUser(null);
-            setCompanyUser(null)
-            navigation.navigate("Login")
-          }
-        });
-      } 
+    },[setSites]) 
 
     const handleSearch = (value) => {
         const searchSite = allSites.filter(site => {

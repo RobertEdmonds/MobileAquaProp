@@ -10,7 +10,7 @@ import { Button,
     } from 'react-native'
 
 
-export default function CompanyView({companyUser, handleLogout, setUser, setCompanyUser}){
+export default function CompanyView({companyUser, handleLogout}){
     const [ completed, setCompleted ] = useState(false)
     const [ companySites, setCompanySites ] = useState([])
     const [ fullList, setFullList ] = useState([])
@@ -22,18 +22,7 @@ export default function CompanyView({companyUser, handleLogout, setUser, setComp
             setCompanySites(company[0].sites)
             setFullList(company[0].sites)
         })
-    },[])
-
-    function handleLogout() {
-        fetch("http://track-my-sand.herokuapp.com/api/logout", { method: "DELETE" }).then((r) => {
-          if (r.ok) {
-            setUser(null);
-            setCompanyUser(null)
-            navigation.navigate("Login")
-          }
-        });
-      } 
-    
+    },[]) 
 
     return(
         <SafeAreaView>
