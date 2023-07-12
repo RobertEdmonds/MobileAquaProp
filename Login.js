@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useLayoutEffect} from 'react';
 import {
   View,
   KeyboardAvoidingView,
@@ -13,19 +13,24 @@ import {
   Alert,
   SafeAreaView
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Login({setUser, setCompanyUser, navigation}){
+export default function Login({setUser, setCompanyUser}){
     const [ username, setUsername ] = useState('')
     const [ password, setPassword ] = useState('')
-    const [ nav, setNav ] = useState(false)
-    const [ companyNav, setCompanyNav ] = useState(false)
+    // const [ nav, setNav ] = useState(false)
+    // const [ companyNav, setCompanyNav ] = useState(false)
+    const navigation = useNavigation()
+    useLayoutEffect(() => {
+      navigation.setOptions({headerShown: false});
+    }, [navigation]);
     
     function handleSubmit() {
         const dataForm = {
           username,
           password,
         };
-        setNav(false)
+        // setNav(false)
         fetch("http://track-my-sand.herokuapp.com/api/login", {
           method: "POST",
           headers: {
@@ -37,12 +42,20 @@ export default function Login({setUser, setCompanyUser, navigation}){
             r.json().then((user) => {
               if(user.hasOwnProperty('email')){
                 setCompanyUser(user)
-                setCompanyNav(true)
+                navigation.reset({
+                  index: 0,
+                  routes: [{ name: 'Company Home' }],
+                })
+                navigation.navigate("Company Home")
               }else{
-                    setUser(user);
-                    setNav(true)
+                setUser(user);
+                navigation.reset({
+                  index: 0,
+                  routes: [{ name: 'Home' }],
+                })
+                navigation.navigate('Home')
                 }
-              })
+            })
             setUsername("");
             setPassword("");
           } else {
@@ -53,15 +66,15 @@ export default function Login({setUser, setCompanyUser, navigation}){
         });
       }
 
-      useEffect(() => {
-        if(nav){
-          navigation.navigate('Home')
-          setNav(false)
-        }else if(companyNav){
-          navigation.navigate("Company Home")
-          setCompanyNav(false)
-        }
-      },[nav, companyNav])
+      // useEffect(() => {
+      //   if(nav){
+      //     navigation.navigate('Home')
+      //     // setNav(false)
+      //   }else if(companyNav){
+      //     navigation.navigate("Company Home")
+      //     // setCompanyNav(false)
+      //   }
+      // },[nav, companyNav])
 
   return (
     <SafeAreaView style={styles.safe_container}>
@@ -74,10 +87,12 @@ export default function Login({setUser, setCompanyUser, navigation}){
           <TextInput placeholder="Username" 
             style={styles.textInput} 
             editable={true} 
+            value={username}
             onChangeText={text => setUsername(text)}/>
           <TextInput placeholder="Password" 
             style={styles.textInput} 
             onChangeText={setPassword}
+            value={password}
             secureTextEntry={true}
             editable={true}/>
           <View style={styles.btnContainer}>

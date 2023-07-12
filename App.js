@@ -24,15 +24,6 @@ export default function App() {
   const [location, setLocation] = useState('')
   const [scanned, setScanned] = useState(false)
 
-  function handleLogout() {
-    fetch("http://track-my-sand.herokuapp.com/api/logout", { method: "DELETE" }).then((r) => {
-      if (r.ok) {
-        setUser(null);
-        setCompanyUser(null)
-      }
-    });
-  } 
-
   const handleAddSand = (load) => {
     const updatedSite = sites.filter(site => {
       if(site.id === load.site_id){
@@ -46,79 +37,79 @@ export default function App() {
     setSites(updatedSite)
   }
 
-  if(user){
-    return(
-      <SafeAreaView style={styles.safe}>
-        <NavigationContainer>
-            <StatusBar
-            backgroundColor="rgb(45, 45, 45)" 
-            barStyle="default"
-            />
-            <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" style={styles.view}>
-              {(props) => <Authenticate {...props} handleLogout={handleLogout} sites={sites} setSites={setSites}/>}
-            </Stack.Screen>
-            <Stack.Screen name="QR Scanner" style={styles.view}>
-              {(props) => <QRScanner {...props} 
-                setTruck={setTruck}
-                setMine={setMine}
-                setTare={setTare}
-                setGross={setGross}
-                setTicket={setTicket}
-                setPo={setPo}
-                setLocation={setLocation}
-                setScanned={setScanned}
-                scanned={scanned}
-                />}
-            </Stack.Screen>
-            <Stack.Screen name="Truck Form" style={styles.view}>
-              {(props) => <TruckForm {...props}
-                setTruck={setTruck}
-                setMine={setMine}
-                setTare={setTare}
-                setGross={setGross}
-                setTicket={setTicket}
-                setPo={setPo} 
-                setLocation={setLocation}
-                truck={truck}
-                mine={mine}
-                tare={tare}
-                gross={gross}
-                ticket={ticket}
-                po={po}
-                location={location}
-                sites={sites}
-                handleAddSand={handleAddSand}
-                setScanned={setScanned}
-              />}
-            </Stack.Screen>
-          </Stack.Navigator>
-        </NavigationContainer>
-      </SafeAreaView>
-    )
-  }else if(companyUser){
-    return(
-      <SafeAreaView style={styles.safe}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" style={styles.view}>
-              {(props) => <CompanyView {...props} handleLogout={handleLogout} companyUser={companyUser}/>}
-            </Stack.Screen>
-          </Stack.Navigator>
-        </NavigationContainer>
-      </SafeAreaView>
-    )
-  }else if(user === null && companyUser === null){
-    return(
-      <SafeAreaView style={styles.safe}>
-        <NavigationContainer>
-          <View style={styles.container}>
-            <Login setUser={setUser} setCompanyUser={setCompanyUser}/>
-          </View>
-        </NavigationContainer>
-      </SafeAreaView>
-    )
-  }
+  // if(user){
+  //   return(
+  //     <SafeAreaView style={styles.safe}>
+  //       <NavigationContainer>
+  //           <StatusBar
+  //           backgroundColor="rgb(45, 45, 45)" 
+  //           barStyle="default"
+  //           />
+  //           <Stack.Navigator initialRouteName="Home">
+  //           <Stack.Screen name="Home" style={styles.view}>
+  //             {(props) => <Authenticate {...props} handleLogout={handleLogout} sites={sites} setSites={setSites}/>}
+  //           </Stack.Screen>
+  //           <Stack.Screen name="QR Scanner" style={styles.view}>
+  //             {(props) => <QRScanner {...props} 
+  //               setTruck={setTruck}
+  //               setMine={setMine}
+  //               setTare={setTare}
+  //               setGross={setGross}
+  //               setTicket={setTicket}
+  //               setPo={setPo}
+  //               setLocation={setLocation}
+  //               setScanned={setScanned}
+  //               scanned={scanned}
+  //               />}
+  //           </Stack.Screen>
+  //           <Stack.Screen name="Truck Form" style={styles.view}>
+  //             {(props) => <TruckForm {...props}
+  //               setTruck={setTruck}
+  //               setMine={setMine}
+  //               setTare={setTare}
+  //               setGross={setGross}
+  //               setTicket={setTicket}
+  //               setPo={setPo} 
+  //               setLocation={setLocation}
+  //               truck={truck}
+  //               mine={mine}
+  //               tare={tare}
+  //               gross={gross}
+  //               ticket={ticket}
+  //               po={po}
+  //               location={location}
+  //               sites={sites}
+  //               handleAddSand={handleAddSand}
+  //               setScanned={setScanned}
+  //             />}
+  //           </Stack.Screen>
+  //         </Stack.Navigator>
+  //       </NavigationContainer>
+  //     </SafeAreaView>
+  //   )
+  // }else if(companyUser){
+  //   return(
+  //     <SafeAreaView style={styles.safe}>
+  //       <NavigationContainer>
+  //         <Stack.Navigator initialRouteName="Home">
+  //           <Stack.Screen name="Home" style={styles.view}>
+  //             {(props) => <CompanyView {...props} handleLogout={handleLogout} companyUser={companyUser}/>}
+  //           </Stack.Screen>
+  //         </Stack.Navigator>
+  //       </NavigationContainer>
+  //     </SafeAreaView>
+  //   )
+  // }else if(user === null && companyUser === null){
+  //   return(
+  //     <SafeAreaView style={styles.safe}>
+  //       <NavigationContainer>
+  //         <View style={styles.container}>
+  //           <Login setUser={setUser} setCompanyUser={setCompanyUser}/>
+  //         </View>
+  //       </NavigationContainer>
+  //     </SafeAreaView>
+  //   )
+  // }
   return (
     <SafeAreaView style={styles.safe}>
     <StatusBar
@@ -126,14 +117,17 @@ export default function App() {
         barStyle="default"
       />
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Login"  screenOptions={{headerShow: false}}>
         {/* {user === null && companyUser === null && ( */}
           <Stack.Screen name="Login" options={{headerShow: false}}>
             {(props) => <Login {...props} setUser={setUser} setCompanyUser={setCompanyUser}/>}
           </Stack.Screen>
+          {/* <View name="Login"  style={styles.container}>
+            <Login setUser={setUser} setCompanyUser={setCompanyUser}/>
+          </View> */}
         {/* )} */}
         <Stack.Screen name="Home" style={styles.view}>
-          {(props) => <Authenticate {...props} handleLogout={handleLogout} sites={sites} setSites={setSites}/>}
+          {(props) => <Authenticate {...props} sites={sites} setSites={setSites} setUser={setUser} setCompanyUser={setCompanyUser}/>}
         </Stack.Screen>
         <Stack.Screen name="QR Scanner" style={styles.view}>
           {(props) => <QRScanner {...props} 
@@ -171,22 +165,10 @@ export default function App() {
         </Stack.Screen>
         {companyUser && (
           <Stack.Screen name="Company Home" style={styles.view}>
-          {(props) => <CompanyView {...props} handleLogout={handleLogout} companyUser={companyUser}/>}
+          {(props) => <CompanyView {...props} setUser={setUser} setCompanyUser={setCompanyUser} companyUser={companyUser}/>}
           </Stack.Screen>
         )}
       </Stack.Navigator>
-    {/* {companyUser &&  (
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" style={styles.view}>
-          {(props) => <CompanyView {...props} handleLogout={handleLogout} companyUser={companyUser}/>}
-        </Stack.Screen>
-      </Stack.Navigator>
-    )} */}
-    {/* {user === null && companyUser === null && (
-        <View style={styles.container}>
-          <Login setUser={setUser} setCompanyUser={setCompanyUser}/>
-        </View>
-    )} */}
     </NavigationContainer>
     </SafeAreaView>
   );
