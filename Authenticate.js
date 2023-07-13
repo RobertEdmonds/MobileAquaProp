@@ -10,7 +10,7 @@ import { Button,
     } from 'react-native'
 
 
-export default function Authenticate({ navigation, sites, handleLogout, setSites, setUser, setCompanyUser}){
+export default function Authenticate({ navigation, sites, handleLogout, setSites}){
     const [ allSites, setAllSites] = useState([])
     const [ completed, setCompleted ] = useState(false)
 
@@ -31,7 +31,6 @@ export default function Authenticate({ navigation, sites, handleLogout, setSites
 
     return(
         <SafeAreaView>
-        {/* <Header style={styles.container}> */}
         <View style={styles.header}>
             <View style={styles.header_button_left}>
             <Button
@@ -55,7 +54,6 @@ export default function Authenticate({ navigation, sites, handleLogout, setSites
           />
           </View>
         </View>
-        {/* </Header>  */}
         <SafeAreaView style={styles.safe_view}>
             {completed ? (<></>): (
             <View style={styles.qr_button}>

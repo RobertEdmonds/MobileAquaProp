@@ -1,4 +1,4 @@
-import React, {useState, useLayoutEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   KeyboardAvoidingView,
@@ -13,22 +13,20 @@ import {
   Alert,
   SafeAreaView
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+
 
 export default function Login({setUser, setCompanyUser}){
     const [ username, setUsername ] = useState('')
     const [ password, setPassword ] = useState('')
-
-    const navigation = useNavigation()
-    useLayoutEffect(() => {
-      navigation.setOptions({headerShown: false});
-    }, [navigation]);
+    // const [ nav, setNav ] = useState(false)
+    // const [ companyNav, setCompanyNav ] = useState(false)
     
     function handleSubmit() {
         const dataForm = {
           username,
           password,
         };
+        // setNav(false)
         fetch("http://track-my-sand.herokuapp.com/api/login", {
           method: "POST",
           headers: {
@@ -40,18 +38,10 @@ export default function Login({setUser, setCompanyUser}){
             r.json().then((user) => {
               if(user.hasOwnProperty('email')){
                 setCompanyUser(user)
-                // navigation.reset({
-                //   index: 0,
-                //   routes: [{ name: 'Company Home' }],
-                // })
-                // navigation.navigate("Company Home")
+                // setCompanyNav(true)
               }else{
                 setUser(user);
-                // navigation.reset({
-                //   index: 0,
-                //   routes: [{ name: 'Home' }],
-                // })
-                // navigation.navigate('Home')
+                // setNav(true)
                 }
             })
             setUsername("");
@@ -64,6 +54,7 @@ export default function Login({setUser, setCompanyUser}){
         });
       }
 
+
   return (
     <SafeAreaView style={styles.safe_container}>
     <KeyboardAvoidingView
@@ -75,12 +66,10 @@ export default function Login({setUser, setCompanyUser}){
           <TextInput placeholder="Username" 
             style={styles.textInput} 
             editable={true} 
-            value={username}
             onChangeText={text => setUsername(text)}/>
           <TextInput placeholder="Password" 
             style={styles.textInput} 
             onChangeText={setPassword}
-            value={password}
             secureTextEntry={true}
             editable={true}/>
           <View style={styles.btnContainer}>

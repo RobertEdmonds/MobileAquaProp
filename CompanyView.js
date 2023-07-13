@@ -24,6 +24,15 @@ export default function CompanyView({companyUser, handleLogout}){
         })
     },[]) 
 
+    function handleLogout() {
+        fetch("http://track-my-sand.herokuapp.com/api/logout", { method: "DELETE" }).then((r) => {
+          if (r.ok) {
+            setUser(null);
+            setCompanyUser(null)
+          }
+        });
+      }
+
     return(
         <SafeAreaView>
         <View style={styles.header}>
