@@ -7,6 +7,7 @@ import { Button,
     View, 
     Text,
     TextInput, 
+    Alert
     } from 'react-native'
 
 
@@ -27,6 +28,11 @@ export default function Authenticate({ navigation, sites, handleLogout, setSites
             return(site.location.toUpperCase().includes(value.toUpperCase()) || site.crew.toUpperCase().includes(value.toUpperCase()))
         })
         setSites(searchSite)
+    }
+
+    const handleQRNavigation = () => {
+        Alert.alert("This will be asking access to your camera. This is to allow you to scan the QRCode on the sand delivery form.")
+        navigation.navigate('QR Scanner')
     }
 
     return(
@@ -57,7 +63,7 @@ export default function Authenticate({ navigation, sites, handleLogout, setSites
         <SafeAreaView style={styles.safe_view}>
             {completed ? (<></>): (
             <View style={styles.qr_button}>
-              <Button title='QR Code Reader' color="black" style={styles.bottom_button} onPress={() => navigation.navigate('QR Scanner')} />
+              <Button title='QR Code Reader' color="black" style={styles.bottom_button} onPress={() => handleQRNavigation()} />
             </View>
             )}
             <ScrollView contentContainerStyle={styles.scroll_view}>
@@ -68,6 +74,7 @@ export default function Authenticate({ navigation, sites, handleLogout, setSites
                         <View style={styles.completed_container} key={site.id}>
                             <Text style={styles.completed_title_text}>{site.location}</Text>
                             <Text style={styles.completed_title_text}>{site.crew}</Text>
+                            <Text style={styles.completed_title_text}>{site.est_total}</Text>
                             <Text style={styles.completed_title_text}>{siteDate[1]}/{siteDate[2]}/{siteDate[0]}</Text>
                             <View style={styles.info_complete_container}>
                                 <Text style={styles.info_complete_text}>Total Sand On-Site</Text>

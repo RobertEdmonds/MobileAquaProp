@@ -118,61 +118,6 @@ export default function App() {
       </SafeAreaView>
     )
   }
-  // return(
-  //   <SafeAreaView style={styles.safe}>
-  //           <StatusBar
-  //           backgroundColor="rgb(45, 45, 45)" 
-  //           barStyle="default"
-  //           />
-  //           <NavigationContainer>
-  //           <Stack.Navigator initialRouteName="Login">
-  //           <Stack.Screen name="Login" style={styles.view}>
-  //             {(props) => <Login {...props} handleLogout={handleLogout} sites={sites} setSites={setSites}/>}
-  //           </Stack.Screen>
-  //           <Stack.Screen name="Home" style={styles.view}>
-  //             {(props) => <Authenticate {...props} handleLogout={handleLogout} sites={sites} setSites={setSites}/>}
-  //           </Stack.Screen>
-  //           <Stack.Screen name="QR Scanner" style={styles.view}>
-  //             {(props) => <QRScanner {...props} 
-  //               setTruck={setTruck}
-  //               setMine={setMine}
-  //               setTare={setTare}
-  //               setGross={setGross}
-  //               setTicket={setTicket}
-  //               setPo={setPo}
-  //               setLocation={setLocation}
-  //               setScanned={setScanned}
-  //               scanned={scanned}
-  //               />}
-  //           </Stack.Screen>
-  //           <Stack.Screen name="Truck Form" style={styles.view}>
-  //             {(props) => <TruckForm {...props}
-  //               setTruck={setTruck}
-  //               setMine={setMine}
-  //               setTare={setTare}
-  //               setGross={setGross}
-  //               setTicket={setTicket}
-  //               setPo={setPo} 
-  //               setLocation={setLocation}
-  //               truck={truck}
-  //               mine={mine}
-  //               tare={tare}
-  //               gross={gross}
-  //               ticket={ticket}
-  //               po={po}
-  //               location={location}
-  //               sites={sites}
-  //               handleAddSand={handleAddSand}
-  //               setScanned={setScanned}
-  //             />}
-  //           </Stack.Screen>
-  //           <Stack.Screen name="Company Home" style={styles.view}>
-  //             {(props) => <CompanyView {...props} handleLogout={handleLogout} companyUser={companyUser}/>}
-  //           </Stack.Screen>
-  //         </Stack.Navigator>
-  //       </NavigationContainer>
-  //     </SafeAreaView>
-  // )
 }
 
 

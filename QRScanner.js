@@ -34,6 +34,7 @@ export default function QRScanner({
     navigation.navigate('Truck Form')
   };
 
+
   useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -45,6 +46,7 @@ export default function QRScanner({
     return <Text>Requesting camera permission...</Text>;
   }
   if (hasPermission === false) {
+    setHasPermission(null)
     return <Text>No access to camera.</Text>;
   }
 
