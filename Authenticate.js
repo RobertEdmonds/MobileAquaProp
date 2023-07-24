@@ -31,7 +31,6 @@ export default function Authenticate({ navigation, sites, handleLogout, setSites
     }
 
     const handleQRNavigation = () => {
-        Alert.alert("This will be asking access to your camera. This is to allow you to scan the QRCode on the sand delivery form.")
         navigation.navigate('QR Scanner')
     }
 

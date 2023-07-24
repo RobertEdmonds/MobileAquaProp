@@ -2,7 +2,7 @@
   "expo": {
     "name": "Aqua Prop Sand",
     "slug": "aquapropsand",
-    "version": "1.1.7",
+    "version": "1.1.8",
     "orientation": "portrait",
     "icon": "./assets/AquaPropEm.png",
     "userInterfaceStyle": "light",
@@ -16,7 +16,10 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.aquaprop.sand"
+      "bundleIdentifier": "com.aquaprop.sand",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to scan QRCodes on sand delivery tickets. Which will pre fill out the truck load submission form with data from the QRCode."
+      }
     },
     "android": {
       "adaptiveIcon": {
